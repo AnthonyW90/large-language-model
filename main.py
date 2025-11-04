@@ -1,5 +1,7 @@
 import re
 
+from Tokenizer import SimpleTokenizerV1
+
 
 def main():
     with open("./the-verdict.txt", "r", encoding="utf-8") as file:
@@ -13,10 +15,13 @@ def main():
 
     vocab = {word: index + 1000 for index, word in enumerate(all_words)}
 
-    for i, item in enumerate(vocab.items()):
-        print(item)
-        if i >= 50:
-            break
+    tokenizer = SimpleTokenizerV1(vocab)
+
+    text = content[:99]
+
+    ids = tokenizer.encode(text)
+
+    print(tokenizer.decode(ids))
 
 
 if __name__ == "__main__":
